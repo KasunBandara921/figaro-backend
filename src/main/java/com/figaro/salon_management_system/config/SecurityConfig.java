@@ -1,9 +1,7 @@
 package com.figaro.salon_management_system.config;
 
-
 import org.springframework.http.HttpMethod;
 import com.figaro.salon_management_system.security.JwtAuthFilter;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,19 +28,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
 
-                .cors(cors -> {})
+                .cors(cors -> {
+                })
                 .csrf(csrf -> csrf.disable())
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
-                    .requestMatchers(HttpMethod.GET, "/api/stylists/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/stylist/**").hasAnyRole("STYLIST", "ADMIN")
-                .requestMatchers("/api/appointments/**").hasAnyRole("CUSTOMER", "ADMIN")
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/stylists/**").permitAll()
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/stylist/**").hasAnyRole("STYLIST", "ADMIN")
+                        .requestMatchers("/api/appointments/stylist/**").hasAnyRole("STYLIST", "ADMIN")
+                        .requestMatchers("/api/appointments/**").hasAnyRole("CUSTOMER", "ADMIN")
+                        .anyRequest().authenticated())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
