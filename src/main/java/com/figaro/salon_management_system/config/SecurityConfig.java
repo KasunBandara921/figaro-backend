@@ -1,6 +1,10 @@
 package com.figaro.salon_management_system.config;
 
+
+import org.springframework.http.HttpMethod;
 import com.figaro.salon_management_system.security.JwtAuthFilter;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,12 +29,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+
+                .cors(cors -> {})
+                .csrf(csrf -> csrf.disable())
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("GET", "/api/services/**").permitAll()
-                .requestMatchers("GET", "/api/stylists/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/stylists/**").permitAll()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/stylist/**").hasAnyRole("STYLIST", "ADMIN")
                 .requestMatchers("/api/appointments/**").hasAnyRole("CUSTOMER", "ADMIN")

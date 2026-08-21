@@ -17,14 +17,4 @@ public class StylistController {
     public List<Stylist> getAllStylists() {
         return stylistService.getAllStylists();
     }
-
-    @PostMapping
-    public Stylist createStylist(@RequestBody Stylist stylist) {
-        return stylistService.createStylist(stylist);
-    }
-
-    @PutMapping("/{id}")
-    public Stylist updateStylist(@PathVariable Long id, @RequestBody Stylist stylist) {
-        return stylistService.updateStylist(id, stylist);
-    }
 }
