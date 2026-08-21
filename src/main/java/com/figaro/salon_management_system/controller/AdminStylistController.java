@@ -21,4 +21,9 @@ public class AdminStylistController {
     public Stylist updateStylist(@PathVariable Long id, @RequestBody Stylist stylist) {
         return stylistService.updateStylist(id, stylist);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteStylist(@PathVariable Long id) {
+        stylistService.deleteStylist(id);
+    }
 }
