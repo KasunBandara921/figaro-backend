@@ -24,4 +24,11 @@ public class AppointmentService {
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
+
+    public Appointment updateAppointmentStatus(Long id, String status) {
+        Appointment existing = appointmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+        existing.setStatus(status);
+        return appointmentRepository.save(existing);
+    }
 }

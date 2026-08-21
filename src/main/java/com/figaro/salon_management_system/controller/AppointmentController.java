@@ -27,4 +27,9 @@ public class AppointmentController {
     public List<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
+
+    @PutMapping("/{id}/status")
+    public Appointment updateStatus(@PathVariable Long id, @RequestParam String status) {
+        return appointmentService.updateAppointmentStatus(id, status);
+    }
 }
