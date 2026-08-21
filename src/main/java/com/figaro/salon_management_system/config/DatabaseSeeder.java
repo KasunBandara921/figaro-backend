@@ -36,13 +36,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("⚠️ Clearing existing database records for a fresh reset...");
-        appointmentRepository.deleteAll();
-        userRepository.deleteAll();
-        serviceRepository.deleteAll();
-        stylistRepository.deleteAll();
-        System.out.println("✅ Database cleared!");
-
+        System.out.println("Initializing database with seeding checks...");
         seedUsers();
         seedServices();
         seedStylists();

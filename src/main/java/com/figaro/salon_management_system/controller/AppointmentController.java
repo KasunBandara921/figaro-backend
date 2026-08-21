@@ -37,4 +37,9 @@ public class AppointmentController {
     public Appointment assignStylist(@PathVariable Long id, @RequestParam Long stylistId) {
         return appointmentService.assignStylist(id, stylistId);
     }
+
+    @GetMapping("/stylist/{name}")
+    public List<Appointment> getByStylist(@PathVariable String name) {
+        return appointmentService.getAppointmentsByStylist(name);
+    }
 }

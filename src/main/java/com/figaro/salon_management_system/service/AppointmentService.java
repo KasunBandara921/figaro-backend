@@ -45,4 +45,8 @@ public class AppointmentService {
         existing.setStylist(stylist);
         return appointmentRepository.save(existing);
     }
+
+    public List<Appointment> getAppointmentsByStylist(String name) {
+        return appointmentRepository.findByStylistName(name);
+    }
 }
