@@ -32,4 +32,9 @@ public class AppointmentController {
     public Appointment updateStatus(@PathVariable Long id, @RequestParam String status) {
         return appointmentService.updateAppointmentStatus(id, status);
     }
+
+    @PutMapping("/{id}/assign")
+    public Appointment assignStylist(@PathVariable Long id, @RequestParam Long stylistId) {
+        return appointmentService.assignStylist(id, stylistId);
+    }
 }
