@@ -68,7 +68,8 @@ public class DatabaseSeeder implements CommandLineRunner {
             customer.setRole(Role.CUSTOMER);
             userRepository.save(customer);
 
-            System.out.println("✅ Seeded default users (Admin: admin@figarosalon.com/admin123, Stylist: stylist@figarosalon.com/stylist123, Customer: customer@figarosalon.com/customer123)");
+            System.out.println(
+                    "✅ Seeded default users (Admin: admin@figarosalon.com/admin123, Stylist: stylist@figarosalon.com/stylist123, Customer: customer@figarosalon.com/customer123)");
         }
     }
 
